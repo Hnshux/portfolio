@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hanshu | Portfolio</title>
+    <title>Hanshu | Integrated Strategist</title>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700;900&family=Caveat:wght@700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -54,7 +54,6 @@
             animation: fadeInUp 1s ease-out 0.5s both;
         }
         .character-container { position: absolute; bottom: 0; height: 100vh; width: 100%; display: flex; justify-content: center; align-items: flex-end; z-index: 2; }
-        /* Reduced base scale and hover zoom for a cleaner feel */
         .character-img { height: 90vh; width: auto; transform: scale(1); transform-origin: bottom center; pointer-events: none; transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .hero:hover .character-img { transform: scale(1.03) translateY(-5px); } 
         .info-footer { position: absolute; bottom: 5%; width: 100%; display: flex; justify-content: space-between; padding: 0 8%; font-size: 11px; text-transform: uppercase; opacity: 0.5; z-index: 10; letter-spacing: 2px; }
@@ -62,7 +61,6 @@
         /* --- 2. CLICK-CHA SECTION --- */
         .project-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 10%; gap: 60px; }
         .project-visual { transform: translateY(50px); }
-        /* Glow/Shadow removed completely */
         .project-visual img { width: 100%; max-width: 480px; border-radius: 12px; transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); filter: grayscale(50%); }
         .project-visual img:hover { filter: grayscale(0%); transform: scale(1.02); }
         .project-content { flex: 1; text-align: left; transform: translateY(50px); }
@@ -125,12 +123,33 @@
 
         footer { text-align: center; padding: 60px; color: #222; font-size: 10px; letter-spacing: 3px; }
 
-        @media (max-width: 900px) {
-            .project-section { flex-direction: column; text-align: center; }
-            .section-header, .feedback-title { font-size: 15vw; }
-            .hobby-item h3 { font-size: 2.8rem; }
-            nav { padding: 20px; }
-            .character-img { height: 70vh; }
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+            
+            /* HERO OPTIMIZATION: Reduced Face Size */
+            .bg-text { font-size: 20vw; }
+            .cursive-title { font-size: 11vw; top: 28%; left: 8%; transform: rotate(-5deg); text-align: center; width: auto;}
+            .character-img { height: 65vh; width: auto; object-fit: contain; } /* Height reduced to 65vh to make face smaller */
+            .character-container { align-items: flex-end; padding-bottom: 20px; }
+            .info-footer { padding: 0 20px; font-size: 8px; bottom: 3%; flex-direction: column; align-items: center; gap: 4px; }
+
+            .project-section { flex-direction: column; text-align: center; padding: 80px 20px; gap: 30px; }
+            .project-title-small { font-size: 13vw; }
+            .project-visual img { max-width: 100%; }
+
+            .section-header { font-size: 13vw; }
+            .bridge-text { font-size: 0.95rem; line-height: 1.6; }
+            
+            #terminal-text { font-size: 1rem; }
+            .grid { grid-template-columns: 1fr; gap: 20px; }
+
+            .hobby-section { padding: 80px 20px; }
+            .hobby-item { height: 380px; padding: 20px; }
+            .hobby-item h3 { font-size: 2.2rem; }
+
+            .feedback-title { font-size: 11vw; }
         }
     </style>
 </head>
@@ -175,12 +194,8 @@
 
     <section id="analyst" class="engine-container">
         <h2 class="section-header reveal">ANALYTICAL ENGINE</h2>
-        <p class="bridge-text reveal">
-            Raw data is just noise until you architect the logic. I specialize in stripping away 
-            the chaos using <span class="highlight">Python</span> and <span class="highlight">SQL</span>.
-        </p>
+        <p class="bridge-text reveal">Raw data is just noise until you architect the logic. I specialize in stripping away the chaos using <span class="highlight">Python</span> and <span class="highlight">SQL</span>.</p>
         <button id="explore-btn" class="explore-btn reveal">Explore Queries <span>→</span></button>
-
         <div id="query-vault">
             <div id="terminal-text"></div>
             <div class="grid">
@@ -247,8 +262,7 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
+                if (elementTop < windowHeight - 100) {
                     reveals[i].classList.add("active");
                 }
             }
@@ -258,16 +272,11 @@
 
         const terminalString = ">_ DECRYPTING_INSIGHTS... STATUS: OPTIMIZED";
         let charIndex = 0;
-
         document.getElementById('explore-btn').addEventListener('click', function() {
             const vault = document.getElementById('query-vault');
             const terminal = document.getElementById('terminal-text');
-            
             vault.style.display = 'block';
-            setTimeout(() => {
-                vault.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-
+            setTimeout(() => { vault.scrollIntoView({ behavior: 'smooth' }); }, 100);
             if (charIndex === 0) {
                 function type() {
                     if (charIndex < terminalString.length) {
@@ -291,7 +300,6 @@
             e.preventDefault();
             btn.innerHTML = "ENCRYPTING...";
             btn.disabled = true;
-
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
                     status.innerHTML = "✓ FEEDBACK SAVED";
