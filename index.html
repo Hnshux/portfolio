@@ -3,318 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hanshu | Integrated Strategist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700;900&family=Caveat:wght@700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>Hanshu | Expert Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --accent: #FFB800; --bg: #000; --gray: #111; --terminal: #00FF41; }
+        :root {
+            --bg: #ffffff;
+            --card: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #2563eb;
+            --border: #e2e8f0;
+            --bar-bg: #e2e8f0;
+            --curve: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg: #020617;
+            --card: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3af;
+            --accent: #60a5fa;
+            --border: #1e293b;
+            --bar-bg: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.4s var(--curve), color 0.4s var(--curve); }
         
         html { scroll-behavior: smooth; }
-        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* --- PRO ANIMATIONS SETUP --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
-        @keyframes scaleIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
+        /* --- Scroll Reveal --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s var(--curve); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        .reveal { opacity: 0; transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0) !important; }
-
-        /* --- NAVIGATION --- */
+        /* --- Navigation --- */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 25px 50px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 100;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-            backdrop-filter: blur(5px);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(var(--bg), 0.8); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 10%;
         }
-        .logo { font-family: 'Anton'; color: var(--accent); font-size: 24px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; }
-        .logo:hover { letter-spacing: 4px; }
-        .nav-links a { color: #fff; text-decoration: none; margin: 0 15px; font-size: 13px; font-weight: 500; opacity: 0.7; transition: 0.3s; text-transform: uppercase; position: relative; }
-        .nav-links a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 0; background: var(--accent); transition: 0.3s; }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a:hover { opacity: 1; color: var(--accent); }
 
-        /* --- 1. HERO SECTION --- */
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        .bg-text { 
-            font-family: 'Anton'; font-size: 18vw; color: #fff; position: absolute; z-index: 1; 
-            text-align: center; width: 100%; user-select: none; pointer-events: none; line-height: 1;
-            animation: scaleIn 1.5s ease-out;
+        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; }
+
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { 
+            text-decoration: none; color: var(--text-muted); 
+            font-weight: 600; font-size: 0.9rem; transition: 0.3s;
         }
-        .cursive-title { 
-            font-family: 'Caveat'; color: var(--accent); font-size: 5.5vw; position: absolute; 
-            top: 22%; left: 15%; z-index: 3; transform: rotate(-8deg); 
-            text-shadow: 0 10px 20px rgba(0,0,0,0.8);
-            animation: fadeInUp 1s ease-out 0.5s both;
+        .nav-links a:hover { color: var(--accent); }
+
+        #theme-toggle {
+            background: none; border: 1px solid var(--border);
+            padding: 5px 12px; border-radius: 8px; font-size: 0.7rem;
+            font-weight: 700; cursor: pointer; color: var(--text-main);
         }
-        .character-container { position: absolute; bottom: 0; height: 100vh; width: 100%; display: flex; justify-content: center; align-items: flex-end; z-index: 2; }
-        .character-img { height: 90vh; width: auto; transform: scale(1); transform-origin: bottom center; pointer-events: none; transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .hero:hover .character-img { transform: scale(1.03) translateY(-5px); } 
-        .info-footer { position: absolute; bottom: 5%; width: 100%; display: flex; justify-content: space-between; padding: 0 8%; font-size: 11px; text-transform: uppercase; opacity: 0.5; z-index: 10; letter-spacing: 2px; }
 
-        /* --- 2. CLICK-CHA SECTION --- */
-        .project-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 10%; gap: 60px; }
-        .project-visual { transform: translateY(50px); }
-        .project-visual img { width: 100%; max-width: 480px; border-radius: 12px; transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); filter: grayscale(50%); }
-        .project-visual img:hover { filter: grayscale(0%); transform: scale(1.02); }
-        .project-content { flex: 1; text-align: left; transform: translateY(50px); }
-        .project-title-small { font-family: 'Anton'; font-size: 5vw; color: #fff; line-height: 1; margin-bottom: 20px; text-transform: uppercase; }
-        .btn-live { display: inline-block; background: var(--accent); color: #000; padding: 14px 40px; font-weight: 900; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; border-radius: 50px; transition: 0.4s; position: relative; overflow: hidden; }
-        .btn-live:hover { background: #fff; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255,184,0,0.3); }
+        /* --- Hero --- */
+        .hero { padding: 12rem 10% 6rem; text-align: center; }
+        .dp-box {
+            width: 140px; height: 140px; margin: 0 auto 2rem;
+            border-radius: 50%; padding: 5px; border: 2px solid var(--accent);
+            animation: pulse 3s infinite;
+        }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); } }
+        .dp-box img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-        /* --- 3. ANALYTICAL ENGINE --- */
-        .engine-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 20px; background: #050505; }
-        .section-header { font-family: 'Anton'; font-size: 8vw; color: #fff; text-transform: uppercase; line-height: 0.8; transition: 0.5s; transform: translateY(30px); }
-        .engine-container:hover .section-header { color: var(--accent); letter-spacing: 2px; }
-        .bridge-text { max-width: 800px; color: #bbb; line-height: 1.8; font-size: 1.1rem; margin: 30px 0 40px; transform: translateY(30px); }
-        .highlight { color: var(--accent); font-weight: bold; }
-        .explore-btn { background: var(--accent); color: #000; padding: 18px 45px; border: none; border-radius: 50px; font-weight: 800; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 10px; margin: 0 auto; transition: 0.3s; transform: translateY(30px); }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; letter-spacing: -2px; margin-bottom: 1rem; }
+        .hero p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+
+        /* --- Global Section Style --- */
+        section { padding: 8rem 10% 4rem; }
+        .section-label { color: var(--accent); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 10px; }
+        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 4rem; }
+
+        /* --- About --- */
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .about-card { background: var(--card); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); }
+        .about-card i { font-size: 1.5rem; color: var(--accent); margin-bottom: 1.5rem; }
+
+        /* --- Detailed Skills --- */
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .skill-group h4 { margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; }
         
-        #query-vault { display: none; padding: 100px 10%; background: #000; border-top: 1px solid #1a1a1a; width: 100%; animation: fadeInUp 0.8s ease; }
-        #terminal-text { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; color: var(--accent); margin-bottom: 60px; min-height: 1.5em; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; }
-        .card { background: #0a0a0a; border: 1px solid #222; padding: 30px; border-radius: 20px; transition: 0.5s ease; text-align: left; }
-        .card:hover { border-color: var(--accent); transform: translateY(-12px); box-shadow: 0 10px 30px rgba(255,184,0,0.1); }
-        pre { background: #050505; padding: 20px; border-radius: 12px; color: var(--terminal); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; border-left: 4px solid var(--accent); overflow-x: auto; margin-top: 15px; }
+        .skill-item { margin-bottom: 1.8rem; }
+        .skill-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
+        .skill-bar { height: 6px; background: var(--bar-bg); border-radius: 10px; overflow: hidden; }
+        .skill-progress { height: 100%; width: 0; background: var(--accent); transition: width 1.5s var(--curve); }
 
-        /* --- 4. CORE_PROCESS --- */
-        .hobby-section { background: #000; padding: 150px 10%; text-align: center; }
-        .hobby-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 50px; }
-        .hobby-item { 
-            height: 500px; position: relative; border: 1px solid #1a1a1a; overflow: hidden; 
-            display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; text-align: left;
-            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 4px; transform: translateY(50px);
-        }
-        .hobby-img { 
-            position: absolute; inset: 0; background-size: cover; background-position: center; 
-            filter: grayscale(100%) brightness(0.2); transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); z-index: 0; 
-        }
-        .hobby-item:hover .hobby-img { filter: grayscale(0%) brightness(0.5); transform: scale(1.05); }
-        .hobby-item:hover { border-color: var(--accent); box-shadow: 0 0 40px rgba(255, 184, 0, 0.15); }
-        .hobby-content { z-index: 2; position: relative; transform: translateY(20px); transition: 0.5s; }
-        .hobby-item:hover .hobby-content { transform: translateY(0); }
-        .hobby-id { font-family: 'JetBrains Mono'; color: var(--accent); font-size: 12px; margin-bottom: 10px; display: block; letter-spacing: 3px; }
-        .hobby-item h3 { font-family: 'Anton'; font-size: 3.5rem; color: #fff; text-transform: uppercase; line-height: 0.9; margin-bottom: 10px; }
-        .hobby-item p { font-family: 'JetBrains Mono'; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
-        .hobby-item:hover p { color: #fff; }
+        /* --- Projects --- */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .project-card { background: var(--card); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .p-thumb { height: 220px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 3rem; }
+        .p-info { padding: 1.5rem; }
 
-        /* --- 5. FEEDBACK VAULT --- */
-        .feedback-section { padding: 120px 10%; background: #050505; text-align: center; border-top: 1px solid #111; }
-        .feedback-container { max-width: 600px; margin: 0 auto; transform: translateY(40px); }
-        .feedback-title { font-family: 'Anton'; font-size: 4rem; margin-bottom: 20px; color: #fff; }
-        .feedback-input { 
-            width: 100%; background: #0a0a0a; border: 1px solid #222; padding: 20px; 
-            color: #fff; font-family: 'Inter'; border-radius: 12px; margin-bottom: 20px; outline: none;
-            transition: 0.3s; resize: none;
-        }
-        .feedback-input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(255,184,0,0.1); }
-        .submit-btn { 
-            background: transparent; color: var(--accent); border: 1px solid var(--accent); 
-            padding: 15px 40px; border-radius: 50px; font-weight: 700; cursor: pointer; 
-            transition: 0.3s; text-transform: uppercase; letter-spacing: 2px; font-size: 12px;
-        }
-        .submit-btn:hover { background: var(--accent); color: #000; transform: translateY(-3px) scale(1.05); }
+        /* --- Contact --- */
+        .contact-box { max-width: 600px; margin: 0 auto; background: var(--card); padding: 3rem; border-radius: 30px; border: 1px solid var(--border); }
+        input, textarea { width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text-main); font-family: inherit; outline: none; }
+        .btn { width: 100%; padding: 1rem; background: var(--accent); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn:hover { transform: scale(1.02); filter: brightness(1.1); }
 
-        footer { text-align: center; padding: 60px; color: #222; font-size: 10px; letter-spacing: 3px; }
+        footer { text-align: center; padding: 4rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
 
-        /* --- MOBILE OPTIMIZATION --- */
         @media (max-width: 768px) {
-            nav { padding: 15px 20px; }
             .nav-links { display: none; }
-            
-            /* HERO OPTIMIZATION: Reduced Face Size */
-            .bg-text { font-size: 20vw; }
-            .cursive-title { font-size: 11vw; top: 28%; left: 8%; transform: rotate(-5deg); text-align: center; width: auto;}
-            .character-img { height: 65vh; width: auto; object-fit: contain; } /* Height reduced to 65vh to make face smaller */
-            .character-container { align-items: flex-end; padding-bottom: 20px; }
-            .info-footer { padding: 0 20px; font-size: 8px; bottom: 3%; flex-direction: column; align-items: center; gap: 4px; }
-
-            .project-section { flex-direction: column; text-align: center; padding: 80px 20px; gap: 30px; }
-            .project-title-small { font-size: 13vw; }
-            .project-visual img { max-width: 100%; }
-
-            .section-header { font-size: 13vw; }
-            .bridge-text { font-size: 0.95rem; line-height: 1.6; }
-            
-            #terminal-text { font-size: 1rem; }
-            .grid { grid-template-columns: 1fr; gap: 20px; }
-
-            .hobby-section { padding: 80px 20px; }
-            .hobby-item { height: 380px; padding: 20px; }
-            .hobby-item h3 { font-size: 2.2rem; }
-
-            .feedback-title { font-size: 11vw; }
+            section { padding: 5rem 5%; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo" onclick="window.scrollTo(0,0)">Hanshu</div>
+        <div class="logo">HANSHU.</div>
         <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#clickcha">Click-Cha</a>
-            <a href="#analyst">Analyst</a>
-            <a href="#hobbies">Hobbies</a>
-            <a href="#feedback">Feedback</a>
-        </div>
-        <div style="width: 35px; height: 18px; background: var(--accent); border-radius: 20px; position: relative;">
-            <div style="width: 12px; height: 12px; background: #000; border-radius: 50%; position: absolute; right: 3px; top: 3px;"></div>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <button id="theme-toggle">DARK</button>
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <h1 class="bg-text">STRATEGIST</h1>
-        <span class="cursive-title">Integrated</span>
-        <div class="character-container">
-            <img src="https://drive.google.com/thumbnail?id=1OQnLaMx2DgTQGbUWEYviH3IqwFyJT74R&sz=w1500" class="character-img" alt="Hanshu">
+    <div class="hero reveal">
+        <div class="dp-box">
+            <img src="https://i.pinimg.com/736x/03/0a/da/030ada6dc0d41495ec6730f0ec82811b.jpg" alt="Hanshu">
         </div>
-        <div class="info-footer">
-            <div>Integrated Strategist</div>
-            <div>Presented By: Hnshux</div>
+        <h1>AI User • Data Analyst • Web Developer</h1>f
+        <p>Passionate about AI, data analytics, and modern web development. I enjoy creating responsive digital experiences and continuously learning new technologies.</p>
+    </div>
+
+    <section id="about">
+        <span class="section-label">Introduction</span>
+        <h2 class="section-title reveal">About Me</h2>
+        <div class="about-grid">
+            <div class="about-card reveal">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Education</h3>
+                <p>Currently pursuing B.A while continuously learning modern technologies and digital skills</p>
+            </div>
+            <div class="about-card reveal">
+                <i class="fas fa-lightbulb"></i>
+                <h3>AI Enthusiast</h3>
+                <p>I know how to use AI tools effectively and improve productivity using modern technologies.</p>
+            </div>
         </div>
     </section>
 
-    <section id="clickcha" class="project-section">
-        <div class="project-visual reveal">
-            <img src="https://drive.google.com/thumbnail?id=1O0S1MQomMQd34RK8BHPzf5AjeFwDNqgC&sz=w1000" alt="Click-Cha Preview">
-        </div>
-        <div class="project-content reveal">
-            <h2 class="project-title-small">CLICK-CHA</h2>
-            <p style="color: #666; margin-bottom: 30px; line-height: 1.8;">Building seamless peer-to-peer connectivity. Focused on low-latency communication and clean, functional interfaces.</p>
-            <a href="https://hnshux.github.io/Click-Cha/" target="_blank" class="btn-live">Launch Server</a>
-        </div>
-    </section>
-
-    <section id="analyst" class="engine-container">
-        <h2 class="section-header reveal">ANALYTICAL ENGINE</h2>
-        <p class="bridge-text reveal">Raw data is just noise until you architect the logic. I specialize in stripping away the chaos using <span class="highlight">Python</span> and <span class="highlight">SQL</span>.</p>
-        <button id="explore-btn" class="explore-btn reveal">Explore Queries <span>→</span></button>
-        <div id="query-vault">
-            <div id="terminal-text"></div>
-            <div class="grid">
-                <div class="card">
-                    <h3>SQL: JOIN Logic</h3>
-                    <pre>SELECT c.name, SUM(o.total) <br>FROM Customers c <br>JOIN Orders o ON c.id = o.user_id <br>GROUP BY c.name;</pre>
+    <section id="skills">
+        <span class="section-label">Expertise</span>
+        <h2 class="section-title reveal">Technical Skills</h2>
+        <div class="skills-container">
+            <!-- Development Group -->
+            <div class="skill-group reveal">
+                <h4>Web Development</h4>
+                <div class="skill-item">
+                    <div class="skill-header"><span>HTML / CSS</span><span>95%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-value="95%"></div></div>
                 </div>
-                <div class="card">
-                    <h3>Python: Automation</h3>
-                    <pre>import pandas as pd<br>df = pd.read_csv('data.csv')<br>clean = df.dropna()<br>print("Optimized.")</pre>
+                <div class="skill-item">
+                    <div class="skill-header"><span>JavaScript (Vanilla)</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-value="85%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Python</span><span>80%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-value="80%"></div></div>
+                </div>
+            </div>
+            <!-- Data & Analytics Group -->
+            <div class="skill-group reveal">
+                <h4>Data & Analysis</h4>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Advanced Excel</span><span>92%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-value="92%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Power BI</span><span>78%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-value="78%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Pandas / NumPy</span><span>70%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" data-value="70%"></div></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="hobbies" class="hobby-section">
-        <h2 class="section-header reveal" style="color: var(--accent);">Hobbies</h2>
-        <div class="hobby-grid">
-            <div class="hobby-item reveal">
-                <div class="hobby-img" style="background-image: url('https://drive.google.com/thumbnail?id=1EMZv79LownXgJjvtQAB4Jb4-8ESVi9h4&sz=w1000');"></div>
-                <div class="hobby-content">
-                    <span class="hobby-id">>Creative Mind</span>
-                    <h3>SKETCH ARTS</h3>
-                    <p>Visual_Rendering_Active</p>
+    <section id="projects">
+        <span class="section-label">Showcase</span>
+        <h2 class="section-title reveal">Selected Work</h2>
+        <div class="project-grid">
+            <div class="project-card reveal">
+                <div class="p-thumb"><i class="fas fa-chart-bar"></i></div>
+                <div class="p-info">
+                    <h3>Data Insights Hub</h3>
+                    <p>Automated reporting dashboard using Power BI and Excel.</p>
                 </div>
             </div>
-            <div class="hobby-item reveal">
-                <div class="hobby-img" style="background-image: url('https://drive.google.com/thumbnail?id=1yIXMzNtEx0KM3kzCtaXvaWVfjkN8eGD7&sz=w1000');"></div>
-                <div class="hobby-content">
-                    <span class="hobby-id">>Explorer</span>
-                    <h3>TRAVELLING</h3>
-                    <p>Geo_Location_Scanning</p>
-                </div>
-            </div>
-            <div class="hobby-item reveal">
-                <div class="hobby-img" style="background-image: url('https://drive.google.com/thumbnail?id=1rz7QETLDlDYtk7Z9x8LkPqfzLG9jta0t&sz=w1000');"></div>
-                <div class="hobby-content">
-                    <span class="hobby-id">>Visual Soul</span>
-                    <h3>DESIGN</h3>
-                    <p>UI_Architecture_Ready</p>
+            <div class="project-card reveal">
+                <div class="p-thumb"><i class="fas fa-terminal"></i></div>
+                <div class="p-info">
+                    <h3> Click-Cha</h3>
+                    <p>Building seamless peer-to-peer connectivity. Focused on low-latency communication and clean, functional interfaces.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="feedback" class="feedback-section">
-        <div class="feedback-container reveal">
-            <h2 class="feedback-title">Feedback</h2>
-            <form id="sheet-form">
-                <textarea name="message" id="feedback-text" class="feedback-input" placeholder="Enter your system feedback here..." rows="5" required></textarea>
-                <button type="submit" id="submit-btn" class="submit-btn">Submit</button>
+    <section id="contact">
+        <span class="section-label">Connection</span>
+        <h2 class="section-title reveal">Get In Touch</h2>
+        <div class="contact-box reveal">
+            <form>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="4" placeholder="How can I help you?" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
             </form>
-            <p id="status-msg" style="margin-top: 20px; font-family: 'JetBrains Mono'; font-size: 12px;"></p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 HANSHU | BUILT FOR THE NEXT WEB</p>
+        &copy; 2026 HANSHU. MINIMALISM MEETS DATA.
     </footer>
 
     <script>
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    reveals[i].classList.add("active");
-                }
+        // 1. Theme Toggle
+        const themeBtn = document.getElementById('theme-toggle');
+        const root = document.documentElement;
+        themeBtn.addEventListener('click', () => {
+            if (root.hasAttribute('data-theme')) {
+                root.removeAttribute('data-theme');
+                themeBtn.innerText = 'DARK';
+            } else {
+                root.setAttribute('data-theme', 'dark');
+                themeBtn.innerText = 'LIGHT';
             }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal();
-
-        const terminalString = ">_ DECRYPTING_INSIGHTS... STATUS: OPTIMIZED";
-        let charIndex = 0;
-        document.getElementById('explore-btn').addEventListener('click', function() {
-            const vault = document.getElementById('query-vault');
-            const terminal = document.getElementById('terminal-text');
-            vault.style.display = 'block';
-            setTimeout(() => { vault.scrollIntoView({ behavior: 'smooth' }); }, 100);
-            if (charIndex === 0) {
-                function type() {
-                    if (charIndex < terminalString.length) {
-                        terminal.innerHTML += terminalString.charAt(charIndex);
-                        charIndex++;
-                        setTimeout(type, 50);
-                    }
-                }
-                type();
-            }
-            this.innerHTML = "Access Granted ✓";
-            this.style.background = "#00FF41";
         });
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbw2PoiZuGEePk6uyjiIUNAg2RpYxKiza4vmNDW82KMofLbgpeWvNfx-LwengKDiGMvn/exec';
-        const form = document.getElementById('sheet-form');
-        const status = document.getElementById('status-msg');
-        const btn = document.getElementById('submit-btn');
+        // 2. Scroll Reveal & Skill Bar Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-value');
+                    });
+                }
+            });
+        }, { threshold: 0.1 });
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            btn.innerHTML = "ENCRYPTING...";
-            btn.disabled = true;
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    status.innerHTML = "✓ FEEDBACK SAVED";
-                    status.style.color = "#00FF41";
-                    btn.innerHTML = "SUBMIT";
-                    btn.disabled = false;
-                    form.reset();
-                })
-                .catch(error => {
-                    status.innerHTML = "X SYSTEM ERROR";
-                    status.style.color = "red";
-                    btn.innerHTML = "RETRY";
-                    btn.disabled = false;
-                });
-        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
