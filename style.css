@@ -32,7 +32,6 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Scroll Reveal --- */
 .reveal { opacity: 0; transform: translateY(30px); transition: 1s var(--curve); }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -45,7 +44,15 @@ nav {
     padding: 0 10%; height: var(--nav-height);
 }
 
+.nav-brand { display: flex; align-items: center; gap: 15px; }
 .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; }
+
+#theme-toggle {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 10px; font-size: 0.65rem;
+    font-weight: 800; cursor: pointer; color: var(--text-main);
+    transition: 0.3s;
+}
 
 .nav-links { display: flex; gap: 2rem; align-items: center; }
 .nav-links a { 
@@ -53,13 +60,6 @@ nav {
     font-weight: 600; font-size: 0.9rem; transition: 0.3s;
 }
 .nav-links a:hover { color: var(--accent); }
-
-#theme-toggle {
-    background: var(--card); border: 1px solid var(--border);
-    padding: 8px 16px; border-radius: 12px; font-size: 0.7rem;
-    font-weight: 800; cursor: pointer; color: var(--text-main);
-    transition: 0.3s;
-}
 
 /* --- Mobile Tab Bar --- */
 .mobile-nav {
@@ -83,23 +83,16 @@ nav {
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); } }
 .dp-box img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-.hero h1 { 
-    font-size: clamp(1.5rem, 6vw, 2.2rem); 
-    font-weight: 700; letter-spacing: -1px; 
-    margin-bottom: 1rem; color: var(--text-main);
-}
+.hero h1 { font-size: clamp(1.5rem, 6vw, 2.2rem); font-weight: 700; letter-spacing: -1px; margin-bottom: 1rem; color: var(--text-main); }
 .typed-text { color: var(--accent); font-weight: 800; border-right: 2px solid var(--accent); padding-right: 5px; animation: caret 1s steps(1) infinite; }
 @keyframes caret { 50% { border-color: transparent; } }
 
 .hero p { color: var(--text-muted); font-size: 1rem; max-width: 550px; margin: 0 auto 1.5rem; opacity: 0.9; }
 
 .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; }
-.social-links a { 
-    color: var(--text-muted); font-size: 1.4rem; transition: 0.3s var(--curve); 
-}
+.social-links a { color: var(--text-muted); font-size: 1.4rem; transition: 0.3s var(--curve); }
 .social-links a:hover { color: var(--accent); transform: translateY(-3px); }
 
-/* --- Sections --- */
 section { padding: 6rem 10% 4rem; }
 .section-label { color: var(--accent); font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 8px; }
 .section-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 3rem; }
@@ -109,16 +102,9 @@ section { padding: 6rem 10% 4rem; }
 .about-card:hover { transform: translateY(-5px); border-color: var(--accent); }
 .about-card i { font-size: 1.3rem; color: var(--accent); margin-bottom: 1.2rem; }
 
-/* --- Updated Skills Highlight --- */
 .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-.skill-group { 
-    background: var(--card); 
-    padding: 2.5rem; 
-    border-radius: 24px; 
-    border: 1px solid var(--border); 
-    transition: 0.4s var(--curve);
-}
-.skill-group:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+.skill-group { background: var(--card); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); transition: 0.4s var(--curve); }
+.skill-group:hover { border-color: var(--accent); transform: translateY(-5px); }
 .skill-group h4 { margin-bottom: 2rem; font-size: 1.2rem; color: var(--accent); display: flex; align-items: center; gap: 10px; }
 
 .skill-item { margin-bottom: 1.5rem; }
@@ -128,35 +114,21 @@ section { padding: 6rem 10% 4rem; }
 
 .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 .project-card { background: var(--card); border-radius: 20px; border: 1px solid var(--border); overflow: hidden; transition: 0.4s var(--curve); cursor: pointer; }
-.project-card:hover { transform: scale(1.02); border-color: var(--accent); }
 .p-thumb { height: 180px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 2.5rem; }
 .p-info { padding: 1.5rem; }
-.p-info h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
 
 .contact-box { max-width: 500px; margin: 0 auto; background: var(--card); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); }
-input, textarea { width: 100%; padding: 0.9rem; margin-bottom: 1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text-main); font-family: inherit; outline: none; }
+input, textarea { width: 100%; padding: 0.9rem; margin-bottom: 1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text-main); font-family: inherit; }
 .btn { width: 100%; padding: 0.9rem; background: var(--accent); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-.btn:disabled { background: var(--text-muted); cursor: not-allowed; }
 
 footer { text-align: center; padding: 4rem 4rem 8rem; color: var(--text-muted); font-size: 0.8rem; }
 .footer-socials { margin-bottom: 1rem; display: flex; justify-content: center; gap: 1rem; }
-.footer-socials a { color: var(--text-muted); text-decoration: none; font-size: 1.1rem; }
 
 @media (max-width: 768px) {
-    /* Nav links hide honge par theme toggle ko dikhayenge */
     .nav-links { display: none; }
-    
-    /* Nav bar mein logo aur button ko balance karne ke liye */
-    nav { 
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center; 
-    }
-
-    /* Naya rule: Theme toggle ko mobile pe hamesha dikhao */
-    #theme-toggle {
-        display: block !important;
-        position: relative;
-        z-index: 2001;
-    }
+    .mobile-nav { display: flex; }
+    section { padding: 4rem 6%; }
+    .hero { padding: 7rem 6% 3rem; }
+    nav { padding: 0 6%; }
+    .nav-brand { display: flex; width: 100%; justify-content: space-between; align-items: center; }
 }
