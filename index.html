@@ -6,120 +6,7 @@
     <title>Hanshu | Expert Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg: #ffffff;
-            --card: #f8fafc;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --accent: #2563eb;
-            --border: #e2e8f0;
-            --bar-bg: #e2e8f0;
-            --curve: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        [data-theme="dark"] {
-            --bg: #020617;
-            --card: #0f172a;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3af;
-            --accent: #60a5fa;
-            --border: #1e293b;
-            --bar-bg: #1e293b;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.4s var(--curve), color 0.4s var(--curve); }
-        
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-
-        /* --- Scroll Reveal --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s var(--curve); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* --- Navigation --- */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(var(--bg), 0.8); backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem 10%;
-        }
-
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; }
-
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { 
-            text-decoration: none; color: var(--text-muted); 
-            font-weight: 600; font-size: 0.9rem; transition: 0.3s;
-        }
-        .nav-links a:hover { color: var(--accent); }
-
-        #theme-toggle {
-            background: none; border: 1px solid var(--border);
-            padding: 5px 12px; border-radius: 8px; font-size: 0.7rem;
-            font-weight: 700; cursor: pointer; color: var(--text-main);
-        }
-
-        /* --- Hero --- */
-        .hero { padding: 12rem 10% 6rem; text-align: center; }
-        .dp-box {
-            width: 140px; height: 140px; margin: 0 auto 2rem;
-            border-radius: 50%; padding: 5px; border: 2px solid var(--accent);
-            animation: pulse 3s infinite;
-        }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); } }
-        .dp-box img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-
-        h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; letter-spacing: -2px; margin-bottom: 1rem; }
-        .hero p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
-
-        /* --- Global Section Style --- */
-        section { padding: 8rem 10% 4rem; }
-        .section-label { color: var(--accent); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 10px; }
-        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 4rem; }
-
-        /* --- About --- */
-        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .about-card { background: var(--card); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); }
-        .about-card i { font-size: 1.5rem; color: var(--accent); margin-bottom: 1.5rem; }
-
-        /* --- Detailed Skills --- */
-        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
-        .skill-group h4 { margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; }
-        
-        .skill-item { margin-bottom: 1.8rem; }
-        .skill-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
-        .skill-bar { height: 6px; background: var(--bar-bg); border-radius: 10px; overflow: hidden; }
-        .skill-progress { height: 100%; width: 0; background: var(--accent); transition: width 1.5s var(--curve); }
-
-        /* --- Projects --- */
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .project-card { background: var(--card); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; }
-        .project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
-        .p-thumb { height: 220px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 3rem; }
-        .p-info { padding: 1.5rem; }
-
-        /* --- Contact --- */
-        .contact-box { max-width: 600px; margin: 0 auto; background: var(--card); padding: 3rem; border-radius: 30px; border: 1px solid var(--border); }
-        input, textarea { width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text-main); font-family: inherit; outline: none; }
-        .btn { width: 100%; padding: 1rem; background: var(--accent); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn:hover { transform: scale(1.02); filter: brightness(1.1); }
-
-        footer { text-align: center; padding: 4rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            section { padding: 5rem 5%; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -134,12 +21,26 @@
         </div>
     </nav>
 
+    <div class="mobile-nav">
+        <a href="#about"><i class="fas fa-user"></i></a>
+        <a href="#skills"><i class="fas fa-code"></i></a>
+        <a href="#projects"><i class="fas fa-th-large"></i></a>
+        <a href="#contact"><i class="fas fa-envelope"></i></a>
+    </div>
+
     <div class="hero reveal">
         <div class="dp-box">
             <img src="https://i.pinimg.com/736x/03/0a/da/030ada6dc0d41495ec6730f0ec82811b.jpg" alt="Hanshu">
         </div>
-        <h1>AI User • Data Analyst • Web Developer</h1>f
-        <p>Passionate about AI, data analytics, and modern web development. I enjoy creating responsive digital experiences and continuously learning new technologies.</p>
+        <h1>I'm a <span class="typed-text"></span></h1>
+        <p>Expert in AI tools, Data Analytics, and Web Development. Crafting high-performance digital solutions with precision.</p>
+        
+        <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
     </div>
 
     <section id="about">
@@ -149,7 +50,7 @@
             <div class="about-card reveal">
                 <i class="fas fa-user-graduate"></i>
                 <h3>Education</h3>
-                <p>Currently pursuing B.A while continuously learning modern technologies and digital skills</p>
+                <p>Currently pursuing B.A while continuously learning modern technologies and digital skills.</p>
             </div>
             <div class="about-card reveal">
                 <i class="fas fa-lightbulb"></i>
@@ -163,9 +64,9 @@
         <span class="section-label">Expertise</span>
         <h2 class="section-title reveal">Technical Skills</h2>
         <div class="skills-container">
-            <!-- Development Group -->
+            
             <div class="skill-group reveal">
-                <h4>Web Development</h4>
+                <h4><i class="fas fa-laptop-code"></i> Web Development</h4>
                 <div class="skill-item">
                     <div class="skill-header"><span>HTML / CSS</span><span>95%</span></div>
                     <div class="skill-bar"><div class="skill-progress" data-value="95%"></div></div>
@@ -179,9 +80,9 @@
                     <div class="skill-bar"><div class="skill-progress" data-value="80%"></div></div>
                 </div>
             </div>
-            <!-- Data & Analytics Group -->
+
             <div class="skill-group reveal">
-                <h4>Data & Analysis</h4>
+                <h4><i class="fas fa-chart-line"></i> Data & Analysis</h4>
                 <div class="skill-item">
                     <div class="skill-header"><span>Advanced Excel</span><span>92%</span></div>
                     <div class="skill-bar"><div class="skill-progress" data-value="92%"></div></div>
@@ -195,6 +96,7 @@
                     <div class="skill-bar"><div class="skill-progress" data-value="70%"></div></div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -209,13 +111,16 @@
                     <p>Automated reporting dashboard using Power BI and Excel.</p>
                 </div>
             </div>
-            <div class="project-card reveal">
-                <div class="p-thumb"><i class="fas fa-terminal"></i></div>
-                <div class="p-info">
-                    <h3> Click-Cha</h3>
-                    <p>Building seamless peer-to-peer connectivity. Focused on low-latency communication and clean, functional interfaces.</p>
+
+            <a href="https://hnshux.github.io/Click-Cha/" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="project-card reveal">
+                    <div class="p-thumb"><i class="fas fa-terminal"></i></div>
+                    <div class="p-info">
+                        <h3>Click-Cha</h3>
+                        <p>Building seamless peer-to-peer connectivity platforms.</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -223,46 +128,23 @@
         <span class="section-label">Connection</span>
         <h2 class="section-title reveal">Get In Touch</h2>
         <div class="contact-box reveal">
-            <form>
-                <input type="email" placeholder="Your Email" required>
-                <textarea rows="4" placeholder="How can I help you?" required></textarea>
-                <button type="submit" class="btn">Send Message</button>
+            <form name="google-sheet">
+                <input type="email" name="username" placeholder="Email Address" required>
+                <textarea name="how can i help" rows="4" placeholder="How can I help you?" required></textarea>
+                <button type="submit" class="btn" id="submit-btn">Send Message</button>
             </form>
         </div>
     </section>
 
     <footer>
-        &copy; 2026 HANSHU. MINIMALISM MEETS DATA.
+        <div class="footer-socials">
+            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        &copy; 2026 Hanshu Portfolio. All rights reserved.
     </footer>
 
-    <script>
-        // 1. Theme Toggle
-        const themeBtn = document.getElementById('theme-toggle');
-        const root = document.documentElement;
-        themeBtn.addEventListener('click', () => {
-            if (root.hasAttribute('data-theme')) {
-                root.removeAttribute('data-theme');
-                themeBtn.innerText = 'DARK';
-            } else {
-                root.setAttribute('data-theme', 'dark');
-                themeBtn.innerText = 'LIGHT';
-            }
-        });
-
-        // 2. Scroll Reveal & Skill Bar Animation
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    const progressBars = entry.target.querySelectorAll('.skill-progress');
-                    progressBars.forEach(bar => {
-                        bar.style.width = bar.getAttribute('data-value');
-                    });
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
