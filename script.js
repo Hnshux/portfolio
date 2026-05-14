@@ -75,3 +75,19 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Existing themeBtn logic ke niche ye add karein
+const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+const mobileIcon = mobileThemeBtn.querySelector('i');
+
+mobileThemeBtn.addEventListener('click', () => {
+    if (root.hasAttribute('data-theme')) {
+        root.removeAttribute('data-theme');
+        themeBtn.innerText = 'DARK'; // Main button update
+        mobileIcon.className = 'fas fa-moon'; // Icon update
+    } else {
+        root.setAttribute('data-theme', 'dark');
+        themeBtn.innerText = 'LIGHT'; // Main button update
+        mobileIcon.className = 'fas fa-sun'; // Icon update
+    }
+});
