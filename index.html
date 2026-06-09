@@ -3,149 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hanshu | Expert Portfolio</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- CSS Link -->
+    <title>Modern Contact Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav>
-        <div class="nav-brand">
-            <div class="logo">HANSHU.</div>
-            <button id="theme-toggle">DARK</button>
-        </div>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
-
-    <div class="mobile-nav">
-        <a href="#about"><i class="fas fa-user"></i></a>
-        <a href="#skills"><i class="fas fa-code"></i></a>
-        <a href="#projects"><i class="fas fa-th-large"></i></a>
-        <a href="#contact"><i class="fas fa-envelope"></i></a>
-    </div>
-
-    <div class="hero reveal">
-        <div class="dp-box">
-            <img src="https://i.pinimg.com/736x/03/0a/da/030ada6dc0d41495ec6730f0ec82811b.jpg" alt="Hanshu">
-        </div>
-        <h1>I'm a <span class="typed-text"></span></h1>
-        <p>Expert in AI tools, Data Analytics, and Web Development. Crafting high-performance digital solutions with precision.</p>
+    <div class="form-container">
+        <h2>Get in Touch</h2>
+        <p>Drop us a message and we'll get back to you shortly.</p>
         
-        <div class="social-links">
-            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-        </div>
+        <form id="contactForm" novalidate>
+            <div class="input-group">
+                <input type="text" id="name" required placeholder=" ">
+                <label for="name">Full Name</label>
+                <span class="error-message" id="nameError">Name is required</span>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="email" required placeholder=" ">
+                <label for="email">Email Address</label>
+                <span class="error-message" id="emailError">Please enter a valid email</span>
+            </div>
+
+            <div class="input-group">
+                <textarea id="message" required placeholder=" " rows="5"></textarea>
+                <label for="message">Your Message</label>
+                <span class="error-message" id="messageError">Message cannot be empty</span>
+            </div>
+
+            <button type="submit" id="submitBtn">
+                <span>Send Message</span>
+            </button>
+        </form>
     </div>
 
-    <section id="about">
-        <span class="section-label">Introduction</span>
-        <h2 class="section-title reveal">About Me</h2>
-        <div class="about-grid">
-            <div class="about-card reveal">
-                <i class="fas fa-user-graduate"></i>
-                <h3>Education</h3>
-                <p>Currently pursuing B.A while continuously learning modern technologies and digital skills.</p>
-            </div>
-            <div class="about-card reveal">
-                <i class="fas fa-lightbulb"></i>
-                <h3>AI Enthusiast</h3>
-                <p>I know how to use AI tools effectively and improve productivity using modern technologies.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills">
-        <span class="section-label">Expertise</span>
-        <h2 class="section-title reveal">Technical Skills</h2>
-        <div class="skills-container">
-            <div class="skill-group reveal">
-                <h4><i class="fas fa-laptop-code"></i> Web Development</h4>
-                <div class="skill-item">
-                    <div class="skill-header"><span>HTML / CSS</span><span>95%</span></div>
-                    <div class="skill-bar"><div class="skill-progress" data-value="95%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>JavaScript (Vanilla)</span><span>85%</span></div>
-                    <div class="skill-bar"><div class="skill-progress" data-value="85%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>Python</span><span>80%</span></div>
-                    <div class="skill-bar"><div class="skill-progress" data-value="80%"></div></div>
-                </div>
-            </div>
-            <div class="skill-group reveal">
-                <h4><i class="fas fa-chart-line"></i> Data & Analysis</h4>
-                <div class="skill-item">
-                    <div class="skill-header"><span>Advanced Excel</span><span>92%</span></div>
-                    <div class="skill-bar"><div class="skill-progress" data-value="92%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>Power BI</span><span>78%</span></div>
-                    <div class="skill-bar"><div class="skill-progress" data-value="78%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>Pandas / NumPy</span><span>70%</span></div>
-                    <div class="skill-bar"><div class="skill-progress" data-value="70%"></div></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <span class="section-label">Showcase</span>
-        <h2 class="section-title reveal">Selected Work</h2>
-        <div class="project-grid">
-            <div class="project-card reveal">
-                <div class="p-thumb"><i class="fas fa-chart-bar"></i></div>
-                <div class="p-info">
-                    <h3>Data Insights Hub</h3>
-                    <p>Automated reporting dashboard using Power BI and Excel.</p>
-                </div>
-            </div>
-            <a href="https://hnshux.github.io/Click-Cha/" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="project-card reveal">
-                    <div class="p-thumb"><i class="fas fa-terminal"></i></div>
-                    <div class="p-info">
-                        <h3>Click-Cha</h3>
-                        <p>Building seamless peer-to-peer connectivity platforms.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section id="contact">
-        <span class="section-label">Connection</span>
-        <h2 class="section-title reveal">Get In Touch</h2>
-        <div class="contact-box reveal">
-            <form name="google-sheet">
-                <input type="email" name="username" placeholder="Email Address" required>
-                <textarea name="how can i help" rows="4" placeholder="How can I help you?" required></textarea>
-                <button type="submit" class="btn" id="submit-btn">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-socials">
-            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
-        &copy; 2026 Hanshu Portfolio. All rights reserved.
-    </footer>
-
-    <!-- JS Link -->
     <script src="script.js"></script>
 </body>
 </html>
