@@ -1,82 +1,71 @@
-// Google Sheet Submission
-const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'; 
-const form = document.forms['google-sheet'];
-const btn = document.getElementById('submit-btn');
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Stop default form submission
 
-if(form) {
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        btn.disabled = true;
-        btn.innerText = "Sending...";
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => {
-                alert("Success! Your message has been sent.");
-                btn.disabled = false;
-                btn.innerText = "Send Message";
-                form.reset();
-            })
-            .catch(error => {
-                btn.disabled = false;
-                btn.innerText = "Send Message";
-            });
-    });
-}
+    // Grab elements
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    const submitBtn = document.getElementById('submitBtn');
 
-// Dark Mode Toggle
-const themeBtn = document.getElementById('theme-toggle');
-const root = document.documentElement;
+    let isValid = true;
 
-themeBtn.addEventListener('click', () => {
-    if (root.hasAttribute('data-theme')) {
-        root.removeAttribute('data-theme');
-        themeBtn.innerText = 'DARK';
+    // 1. Name Validation
+    if (nameInput.value.trim() === '') {
+        showError(nameInput);
+        isValid = false;
     } else {
-        root.setAttribute('data-theme', 'dark');
-        themeBtn.innerText = 'LIGHT';
+        clearError(nameInput);
+    }
+
+    // 2. Email Validation (Simple Regex)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailInput.value.trim())) {
+        showError(emailInput);
+        isValid = false;
+    } else {
+        clearError(emailInput);
+    }
+
+    // 3. Message Validation
+    if (messageInput.value.trim() === '') {
+        showError(messageInput);
+        isValid = false;
+    } else {
+        clearError(messageInput);
+    }
+
+    // If everything passes, handle the submission logic
+    if (isValid) {
+        submitBtn.innerHTML = '<span>Sending...</span>';
+        submitBtn.style.opacity = '0.7';
+        submitBtn.disabled = true;
+
+        // Simulate network request (Replace with your actual API endpoint or backend handler)
+        setTimeout(() => {
+            alert('Form submitted successfully!');
+            document.getElementById('contactForm').reset();
+            submitBtn.innerHTML = '<span>Send Message</span>';
+            submitBtn.style.opacity = '1';
+            submitBtn.disabled = false;
+        }, 1500);
     }
 });
 
-// Typing Effect
-const typedTextSpan = document.querySelector(".typed-text");
-const textArray = ["AI User", "Data Analyst", "Web Developer"];
-let textArrayIndex = 0; 
-let charIndex = 0;
-
-function type() {
-    if (charIndex < textArray[textArrayIndex].length) {
-        typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
-        charIndex++; 
-        setTimeout(type, 100);
-    } else { 
-        setTimeout(erase, 2000); 
-    }
+// Helper functions to manage error classes
+function showError(inputElement) {
+    inputElement.parentElement.classList.add('error');
 }
 
-function erase() {
-    if (charIndex > 0) {
-        typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
-        charIndex--; 
-        setTimeout(erase, 50);
-    } else {
-        textArrayIndex = (textArrayIndex + 1) % textArray.length;
-        setTimeout(type, 500);
-    }
+function clearError(inputElement) {
+    inputElement.parentElement.classList.remove('error');
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    if(typedTextSpan) setTimeout(type, 1000);
-});
-
-// Reveal Animation on Scroll
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            entry.target.querySelectorAll('.skill-progress').forEach(bar => {
-                bar.style.width = bar.getAttribute('data-value');
-            });
+// Clear error indicators in real-time when the user begins typing
+const inputs = document.querySelectorAll('#contactForm input, #contactForm textarea');
+inputs.forEach(input => {
+    input.addEventListener('input', () => {
+        if (input.value.trim() !== '') {
+            clearError(input);
         }
     });
-}, { threshold: 0.15 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+});
