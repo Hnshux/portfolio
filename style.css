@@ -9,7 +9,8 @@
     --tag-bg: #1e293b;
 }
 
-* {
+/* Sabhi elements ke liye box-sizing corect kiya */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -19,20 +20,22 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px; 
+    overflow-x: hidden; /* Screen baahar nikalne se rokne ke liye */
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
     line-height: 1.6;
-    padding: 0 20px;
-    padding-bottom: 80px; 
+    overflow-x: hidden;
 }
 
+/* Padding ko body se hata kar container me dala taaki width kharab na ho */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 20px;
+    padding-bottom: 100px; /* Mobile bottom tab bar ke liye safe space */
 }
 
 /* --- NAVIGATION (DESKTOP) --- */
@@ -93,7 +96,7 @@ nav {
 
 /* --- MOBILE BOTTOM TABS BAR --- */
 .mobile-tab-bar {
-    display: none;
+    display: none; 
     position: fixed;
     bottom: 0;
     left: 0;
@@ -104,7 +107,7 @@ nav {
     z-index: 2000;
     justify-content: space-around;
     align-items: center;
-    padding: 10px 0;
+    padding: 12px 0;
 }
 
 .tab-item {
@@ -132,7 +135,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 80px 0 60px 0;
+    padding: 60px 0;
     gap: 40px;
 }
 
@@ -537,10 +540,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    body {
-        padding: 0 15px 80px 15px; 
-    }
-
     .nav-links, nav .btn-cv {
         display: none;
     }
