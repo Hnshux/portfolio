@@ -5,645 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hanshu | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-color: #030712;
-            --card-bg: #0b1329;
-            --card-border: #1e293b;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --accent-blue: #3b82f6;
-            --accent-purple: #a855f7;
-            --tag-bg: #1e293b;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            /* मोबाइल स्क्रॉलिंग को स्मूथ और बेहतर बनाने के लिए */
-            scroll-padding-top: 80px; 
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 0 20px;
-            /* मोबाइल बॉटम टैब बार के लिए नीचे थोड़ी जगह */
-            padding-bottom: 80px; 
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
-
-        /* --- NAVIGATION (DESKTOP) --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--card-border);
-            position: sticky;
-            top: 0;
-            background-color: rgba(3, 7, 18, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--accent-blue);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 15px;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-main);
-        }
-
-        .btn-cv {
-            border: 1px solid var(--accent-purple);
-            color: var(--text-main);
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.3s;
-        }
-
-        .btn-cv:hover {
-            background: rgba(168, 85, 247, 0.1);
-        }
-
-        /* --- MOBILE BOTTOM TABS BAR --- */
-        .mobile-tab-bar {
-            display: none; /* डेस्कटॉप पर छुपा रहेगा */
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(11, 19, 41, 0.95);
-            border-top: 1px solid var(--card-border);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 0;
-        }
-
-        .tab-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 11px;
-            gap: 4px;
-            flex: 1;
-            transition: color 0.3s;
-        }
-
-        .tab-item i {
-            font-size: 20px;
-        }
-
-        .tab-item:hover, .tab-item:active {
-            color: var(--accent-blue);
-        }
-
-
-        /* --- HERO SECTION --- */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 80px 0 60px 0;
-            gap: 40px;
-        }
-
-        .hero-text {
-            flex: 1;
-        }
-
-        .badge {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent-blue);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .hero-text h1 {
-            font-size: 56px;
-            margin-bottom: 10px;
-            line-height: 1.2;
-        }
-
-        .hero-tags {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .tag-blue { color: var(--accent-blue); }
-        .tag-cyan { color: #06b6d4; }
-        .tag-purple { color: var(--accent-purple); }
-
-        .hero-desc {
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            max-width: 500px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-        }
-
-        .btn-secondary {
-            border: 1px solid var(--card-border);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.02);
-        }
-
-        .hero-image-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        .hero-image {
-            width: 320px;
-            height: 320px;
-            background: #1e293b;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid var(--accent-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* --- STATS BAR --- */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 60px;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .stat-icon {
-            font-size: 24px;
-            color: var(--accent-blue);
-        }
-
-        .stat-info h3 {
-            font-size: 24px;
-        }
-
-        .stat-info p {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        /* --- TWO COLUMN GRID --- */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-            margin-bottom: 60px;
-            padding-top: 40px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 30px;
-        }
-
-        .card-title {
-            font-size: 18px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .about-card p {
-            color: var(--text-muted);
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-
-        /* --- TECH STACK ELEMENTS --- */
-        .stack-category {
-            margin-bottom: 20px;
-        }
-
-        .stack-category h4 {
-            font-size: 12px;
-            color: var(--accent-blue);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-        }
-
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            background: var(--tag-bg);
-            border: 1px solid var(--card-border);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            color: var(--text-main);
-        }
-
-        /* --- PROJECTS SECTION --- */
-        .projects-section {
-            padding-top: 40px;
-            margin-bottom: 60px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            overflow: hidden;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .project-img-placeholder {
-            width: 100%;
-            height: 160px;
-            background: #1e293b;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .project-title {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .project-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .project-link:hover {
-            color: var(--accent-blue);
-        }
-
-        .project-features {
-            list-style: none;
-            margin-bottom: 15px;
-        }
-
-        .project-features li {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .project-features li i {
-            color: #22c55e;
-            font-size: 12px;
-        }
-
-        /* --- SKILLS SECTION --- */
-        .skills-section {
-            padding-top: 40px;
-            margin-bottom: 60px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .skill-item {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .skill-bar-bg {
-            background: var(--tag-bg);
-            height: 6px;
-            border-radius: 3px;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .skill-bar-fill {
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            height: 100%;
-            border-radius: 3px;
-        }
-
-        /* --- FOOTER / LET'S CONNECT --- */
-        footer {
-            background: var(--card-bg);
-            border-top: 1px solid var(--card-border);
-            padding: 40px 20px;
-            margin-top: 60px;
-            border-radius: 12px 12px 0 0;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            align-items: start;
-        }
-
-        .footer-col h3 {
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-
-        .footer-col p {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        .contact-list {
-            list-style: none;
-        }
-
-        .contact-list li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: var(--text-muted);
-            word-break: break-word; /* मोबाइल पर ईमेल कटने से बचाने के लिए */
-        }
-
-        .contact-list i {
-            color: var(--accent-purple);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--tag-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-main);
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-
-        .social-icon:hover {
-            background: var(--accent-blue);
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid var(--card-border);
-            font-size: 12px;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* --- RESPONSIVE MEDIA QUERIES (UPDATED FOR PHONE & TABS) --- */
-        @media (max-width: 1024px) {
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .skills-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 0 15px 80px 15px; /* मोबाइल पर साइड पैडिंग थोड़ी कम */
-            }
-
-            /* डेस्कटॉप का टॉप नेव लिंक्स हाइड करें */
-            .nav-links, nav .btn-cv {
-                display: none;
-            }
-
-            /* मोबाइल बॉटम टैब बार दिखाएं */
-            .mobile-tab-bar {
-                display: flex;
-            }
-
-            nav {
-                justify-content: center; /* मोबाइल पर लोगो सेंटर में */
-                padding: 15px 0;
-            }
-
-            .hero {
-                flex-direction: column-reverse; /* इमेज ऊपर, टेक्स्ट नीचे */
-                text-align: center;
-                padding: 30px 0;
-                gap: 25px;
-            }
-
-            .hero-text h1 {
-                font-size: 42px;
-            }
-
-            .hero-desc {
-                margin: 0 auto 25px auto;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-                flex-direction: column; /* बटन एक के नीचे एक आएंगे */
-                gap: 12px;
-            }
-
-            .hero-image {
-                width: 250px; /* मोबाइल के हिसाब से छोटी इमेज */
-                height: 250px;
-            }
-
-            .stats-bar {
-                grid-template-columns: repeat(2, 1fr); /* 2x2 ग्रिड मोबाइल पर */
-                gap: 15px;
-                padding: 15px;
-                margin-bottom: 40px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr; /* एक लाइन में एक प्रोजेक्ट */
-            }
-
-            .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .copyright {
-                flex-direction: column;
-                gap: 10px;
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-text h1 {
-                font-size: 34px;
-            }
-
-            .stats-bar {
-                grid-template-columns: 1fr; /* बहुत छोटे स्क्रीन पर सिंगल कॉलम */
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .card {
-                padding: 20px; /* कार्ड के अंदर की जगह कम करें */
-            }
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <div class="fixed inset-0 overflow-hidden -z-20 pointer-events-none">
+        <div class="blob w-[40vw] h-[40vw] bg-purple-200/40 top-[-10%] left-[-10%]"></div>
+        <div class="blob w-[45vw] h-[45vw] bg-blue-200/30 top-[40%] right-[-10%]" style="animation-delay: 2s;"></div>
+    </div>
+
     <div class="container">
-        <nav>
-            <div class="logo">HANSHU <span>&lt;/&gt;</span></div>
+        <nav class="glass-card">
+            <div class="logo">हंशु <span class="text-blue-600">&lt;/&gt;</span></div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -656,292 +31,191 @@
         </nav>
 
         <div class="mobile-tab-bar">
-            <a href="#home" class="tab-item">
-                <i class="fa-solid fa-house"></i>
-                <span>Home</span>
-            </a>
-            <a href="#about" class="tab-item">
-                <i class="fa-regular fa-user"></i>
-                <span>About</span>
-            </a>
-            <a href="#skills" class="tab-item">
-                <i class="fa-solid fa-bolt"></i>
-                <span>Skills</span>
-            </a>
-            <a href="#projects" class="tab-item">
-                <i class="fa-solid fa-diagram-project"></i>
-                <span>Projects</span>
-            </a>
-            <a href="#contact" class="tab-item">
-                <i class="fa-solid fa-paper-plane"></i>
-                <span>Contact</span>
-            </a>
+            <a href="#home" class="tab-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="#about" class="tab-item"><i class="fa-regular fa-user"></i><span>About</span></a>
+            <a href="#skills" class="tab-item"><i class="fa-solid fa-bolt"></i><span>Skills</span></a>
+            <a href="#projects" class="tab-item"><i class="fa-solid fa-diagram-project"></i><span>Projects</span></a>
+            <a href="#contact" class="tab-item"><i class="fa-solid fa-paper-plane"></i><span>Contact</span></a>
         </div>
 
-        <section id="home" class="hero">
-            <div class="hero-text">
-                <span class="badge">DATA ANALYST & PYTHON DEVELOPER</span>
-                <h1>Hanshu</h1>
-                <div class="hero-tags">
-                    <span class="tag-blue">Data Analyst</span> • 
-                    <span class="tag-cyan">Python Developer</span> • 
-                    <span class="tag-purple">AI Enthusiast</span>
-                </div>
-                <p class="hero-desc">Transforming raw data into meaningful insights and building modern web experiences powered by AI.</p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn-primary">View Projects <i class="fa-solid fa-arrow-right"></i></a>
-                    <a href="#contact" class="btn-secondary">Contact Me <i class="fa-solid fa-paper-plane"></i></a>
-                </div>
+        <section id="home" class="hero" data-aos="zoom-out">
+            <span class="badge">DATA ANALYST & PYTHON DEVELOPER</span>
+            <h1>HANSHU</h1>
+            <div class="hero-tags">
+                <span>Data Analyst</span> • <span>Python Developer</span> • <span>AI Enthusiast</span>
             </div>
-            <div class="hero-image-container">
-                <div class="hero-image">
-                    <img src="https://i.pinimg.com/736x/0a/04/21/0a0421018fa6bf524ca3b49e55c04d1f.jpg" alt="Hanshu">
-                </div>
+            <p class="hero-desc">Transforming raw data into meaningful insights and building modern web experiences powered by AI.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn-primary">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#contact" class="btn-secondary">Contact Me</a>
             </div>
         </section>
 
-        <section class="stats-bar">
+        <section class="stats-bar glass-card" data-aos="fade-up">
             <div class="stat-item">
                 <div class="stat-icon"><i class="fa-solid fa-chart-simple"></i></div>
-                <div class="stat-info">
-                    <h3>3+</h3>
-                    <p>Projects Built</p>
-                </div>
+                <div class="stat-info"><h3>3+</h3><p>Projects Built</p></div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fa-solid fa-code"></i></div>
-                <div class="stat-info">
-                    <h3>5+</h3>
-                    <p>Technologies</p>
-                </div>
+                <div class="stat-info"><h3>5+</h3><p>Technologies</p></div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fa-solid fa-rocket"></i></div>
-                <div class="stat-info">
-                    <h3>Strong</h3>
-                    <p>Problem Solver</p>
-                </div>
+                <div class="stat-info"><h3>Strong</h3><p>Problem Solver</p></div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fa-solid fa-bullseye"></i></div>
-                <div class="stat-info">
-                    <h3>100%</h3>
-                    <p>Learning Mindset</p>
-                </div>
+                <div class="stat-info"><h3>100%</h3><p>Learning Mindset</p></div>
             </div>
         </section>
 
         <div class="info-grid" id="about">
-            <div class="card about-card">
+            <div class="card glass-card about-card" data-aos="fade-up">
                 <div class="card-title"><i class="fa-regular fa-user" style="color:var(--accent-blue)"></i> About Me</div>
                 <p>I am a Data Analyst and Web Developer who loves turning complex data into clear, actionable insights.</p>
                 <p>I work with Python, SQL, Excel, Pandas, NumPy and modern web technologies to build intelligent solutions.</p>
                 <p>I enjoy solving real-world problems through data, automation, and AI-powered applications.</p>
             </div>
 
-            <div class="card" id="tools">
+            <div class="card glass-card" id="tools" data-aos="fade-up" data-aos-delay="100">
                 <div class="card-title"><i class="fa-solid fa-layer-group" style="color:var(--accent-purple)"></i> Tech Stack & Tools</div>
                 
                 <div class="stack-category">
                     <h4>Data Analytics</h4>
                     <div class="tags-container">
-                        <span class="tag">Python</span>
-                        <span class="tag">Pandas</span>
-                        <span class="tag">NumPy</span>
-                        <span class="tag">SQL</span>
-                        <span class="tag">Microsoft Excel</span>
-                        <span class="tag">Google Sheets</span>
+                        <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">SQL</span><span class="tag">Microsoft Excel</span><span class="tag">Google Sheets</span>
                     </div>
                 </div>
 
                 <div class="stack-category">
                     <h4>Data Visualization</h4>
                     <div class="tags-container">
-                        <span class="tag">Excel Dashboards</span>
-                        <span class="tag">Pivot Tables</span>
-                        <span class="tag">Data Cleaning</span>
-                        <span class="tag">Data Analysis</span>
-                        <span class="tag">Reporting</span>
+                        <span class="tag">Excel Dashboards</span><span class="tag">Pivot Tables</span><span class="tag">Data Cleaning</span><span class="tag">Data Analysis</span><span class="tag">Reporting</span>
                     </div>
                 </div>
 
                 <div class="stack-category">
                     <h4>Development</h4>
                     <div class="tags-container">
-                        <span class="tag">HTML5</span>
-                        <span class="tag">CSS3</span>
-                        <span class="tag">JavaScript (Basics)</span>
-                        <span class="tag">Firebase</span>
-                        <span class="tag">VS Code</span>
+                        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript (Basics)</span><span class="tag">Firebase</span><span class="tag">VS Code</span>
                     </div>
                 </div>
 
                 <div class="stack-category">
                     <h4>AI & Automation</h4>
                     <div class="tags-container">
-                        <span class="tag">LLM APIs</span>
-                        <span class="tag">Prompt Engineering</span>
-                        <span class="tag">Generative AI</span>
-                        <span class="tag">AI Workflow</span>
-                        <span class="tag">API Integration</span>
-                    </div>
-                </div>
-
-                <div class="stack-category">
-                    <h4>Tools & Skills</h4>
-                    <div class="tags-container">
-                        <span class="tag">Git & GitHub</span>
-                        <span class="tag">Problem Solving</span>
-                        <span class="tag">Data Verification</span>
-                        <span class="tag">Typing (32+ WPM)</span>
+                        <span class="tag">LLM APIs</span><span class="tag">Prompt Engineering</span><span class="tag">Generative AI</span><span class="tag">AI Workflow</span><span class="tag">API Integration</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <section id="projects" class="projects-section">
-            <div class="section-header">
+            <div class="section-header mb-8" data-aos="fade-up">
                 <div class="card-title" style="margin:0;"><i class="fa-solid fa-diagram-project" style="color:var(--accent-blue)"></i> Featured Projects</div>
-                <a href="#" style="color:var(--accent-blue); text-decoration:none; font-size:14px;">View All <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#" style="color:var(--text-muted); text-decoration:none; font-size:13px; font-weight:600;">View All <i class="fa-solid fa-arrow-right ml-1"></i></a>
             </div>
             
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="50">
                     <div>
-                        <div class="project-img-placeholder">[ Click-Cha UI Preview ]</div>
+                        <div class="project-img-placeholder">CLICK-CHA ARCHITECTURE</div>
                         <div class="project-meta">
                             <div class="project-title">Click-Cha</div>
                             <a href="https://your-click-cha-link.com" target="_blank" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
-                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">Real-Time Chat Application</p>
+                        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Real-Time Chat Application</p>
                         <ul class="project-features">
                             <li><i class="fa-solid fa-circle-check"></i> Real-time messaging using Firebase</li>
                             <li><i class="fa-solid fa-circle-check"></i> Instant data sync and communication</li>
                             <li><i class="fa-solid fa-circle-check"></i> Responsive UI with modern design</li>
                         </ul>
                     </div>
-                    <div class="tags-container" style="margin-top:15px;">
-                        <span class="tag">HTML5</span>
-                        <span class="tag">CSS3</span>
-                        <span class="tag">Firebase</span>
+                    <div class="tags-container mt-4">
+                        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Firebase</span>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="150">
                     <div>
-                        <div class="project-img-placeholder">[ SPENDY UI Preview ]</div>
+                        <div class="project-img-placeholder">SPENDY AI PROCESSOR</div>
                         <div class="project-meta">
                             <div class="project-title">SPENDY</div>
                             <a href="https://your-spendy-link.com" target="_blank" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
-                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">AI-Powered Expense Tracker</p>
+                        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">AI-Powered Expense Tracker</p>
                         <ul class="project-features">
                             <li><i class="fa-solid fa-circle-check"></i> Personal expense tracking system</li>
                             <li><i class="fa-solid fa-circle-check"></i> AI insights using LLM API</li>
                             <li><i class="fa-solid fa-circle-check"></i> Smart categorization & analytics</li>
                         </ul>
                     </div>
-                    <div class="tags-container" style="margin-top:15px;">
-                        <span class="tag">HTML5</span>
-                        <span class="tag">CSS3</span>
-                        <span class="tag">AI API</span>
+                    <div class="tags-container mt-4">
+                        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">AI API</span>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="250">
                     <div>
-                        <div class="project-img-placeholder">[ Sales Data UI Preview ]</div>
+                        <div class="project-img-placeholder">SALES PIPELINE METRICS</div>
                         <div class="project-meta">
                             <div class="project-title">Sales Data Analysis</div>
                             <a href="https://your-sales-data-link.com" target="_blank" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
-                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">Data Analysis & Visualization</p>
+                        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Data Analysis & Visualization</p>
                         <ul class="project-features">
                             <li><i class="fa-solid fa-circle-check"></i> Data cleaning using Pandas & NumPy</li>
                             <li><i class="fa-solid fa-circle-check"></i> Trend analysis and insights</li>
                             <li><i class="fa-solid fa-circle-check"></i> Excel dashboards with Pivot Tables</li>
                         </ul>
                     </div>
-                    <div class="tags-container" style="margin-top:15px;">
-                        <span class="tag">Python</span>
-                        <span class="tag">Pandas</span>
-                        <span class="tag">Excel</span>
+                    <div class="tags-container mt-4">
+                        <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Excel</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="skills" class="skills-section">
-            <div class="card-title"><i class="fa-solid fa-bolt" style="color:var(--accent-purple)"></i> My Skills & Proficiency</div>
+            <div class="card-title" data-aos="fade-up"><i class="fa-solid fa-bolt" style="color:var(--accent-purple)"></i> My Skills & Proficiency</div>
             <div class="skills-grid">
-                <div class="skill-item">
-                    <div class="skill-info"><span>Python</span><span>85%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>Excel Pivot Tables</span><span>90%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>HTML5</span><span>90%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>LLM API & Prompting</span><span>80%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>Pandas</span><span>80%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>VLOOKUP / XLOOKUP</span><span>85%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>CSS3</span><span>85%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>Generative AI</span><span>75%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>NumPy</span><span>75%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>Data Cleaning</span><span>85%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>JavaScript</span><span>60%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 60%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>Google Sheets</span><span>80%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
-                </div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="30"><div class="skill-info"><span>Python</span><span>85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="60"><div class="skill-info"><span>Excel Pivot</span><span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="90"><div class="skill-info"><span>HTML5</span><span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="120"><div class="skill-info"><span>LLM APIs</span><span>80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="150"><div class="skill-info"><span>Pandas</span><span>80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="180"><div class="skill-info"><span>XLOOKUP</span><span>85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="210"><div class="skill-info"><span>CSS3</span><span>85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="240"><div class="skill-info"><span>Gen AI</span><span>75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="270"><div class="skill-info"><span>SQL</span><span>80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="300"><div class="skill-info"><span>JavaScript</span><span>70%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 70%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="330"><div class="skill-info"><span>Firebase</span><span>75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="360"><div class="skill-info"><span>Data Viz</span><span>80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="390"><div class="skill-info"><span>Power BI</span><span>85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="420"><div class="skill-info"><span>API Integration</span><span>80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="450"><div class="skill-info"><span>AI Automation</span><span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div></div>
+                <div class="skill-item glass-card" data-aos="zoom-in" data-aos-delay="480"><div class="skill-info"><span>GitHub</span><span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div></div>    
             </div>
         </section>
 
-        <footer id="contact">
+        <footer id="contact" class="glass-card" data-aos="fade-up">
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3>LET'S CONNECT</h3>
                     <p>I'm open to new opportunities and exciting projects. Let's build something amazing together!</p>
                     <br>
-                    <a href="mailto:108himanshuu@gmail.com" class="btn-secondary" style="display:inline-flex; width: auto;">Get In Touch <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="mailto:108himanshuu@gmail.com" class="btn-primary" style="display:inline-flex; width: auto;">Get In Touch</a>
                 </div>
                 <div class="footer-col">
-                    <ul class="contact-list">
+                    <ul class="contact-list" style="padding-top:30px;">
                         <li><i class="fa-regular fa-envelope"></i> 108himanshuu@gmail.com</li>
                         <li><i class="fa-brands fa-instagram"></i> hnshux</li>
                         <li><i class="fa-solid fa-location-dot"></i> Gurugram, Haryana, India</li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h3>FIND ME ONLINE</h3>
+                    <h3 style="padding-top:30px;">FIND ME ONLINE</h3>
                     <div class="social-links">
                         <a href="#" class="social-icon"><i class="fa-brands fa-github"></i></a>
                         <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -956,5 +230,7 @@
         </footer>
     </div>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
