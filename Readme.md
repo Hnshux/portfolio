@@ -206,8 +206,7 @@ I'm **Hanshu**, a passionate Data Analyst, AI Developer, and Full Stack Builder 
 ## 📫 Connect With Me
 
 - GitHub: https://github.com/hnshux
-- LinkedIn: Add Your LinkedIn
-- Email: your-email@example.com
+- Email: saarvain@gmail.com
 
 ---
 
