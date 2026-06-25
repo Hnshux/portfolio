@@ -151,7 +151,7 @@ portfolio/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/hnshux/portfolio.git
+git clone https://hnshux.github.io/portfolio/
 ```
 
 ### Open Project
