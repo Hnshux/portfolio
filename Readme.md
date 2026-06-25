@@ -2,7 +2,8 @@
 
 A modern, premium, glassmorphism-inspired personal portfolio website showcasing my journey as a Data Analyst, AI Developer, and Full Stack Builder.
 
-![Portfolio Preview](https://via.placeholder.com/1200x600?text=Hanshu+Portfolio)
+<img width="1583" height="760" alt="image" src="https://github.com/user-attachments/assets/0d72dcd1-3062-44ec-a3bd-e735b6257a56" />
+
 
 ## ✨ Features
 
